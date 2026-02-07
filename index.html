@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    
+    <!-- CHANGE THIS: Update the title to your team name -->
+    <title>TheGameHub Landing Page</title>
+    
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        // CHANGE THIS: Update your brand colors if desired
+                        "primary": "#7311d4",
+                        "background-light": "#f7f6f8",
+                        "background-dark": "#191022",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+    
+    <style>
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        .glass-nav {
+            background: rgba(25, 16, 34, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .hero-gradient {
+            background: linear-gradient(to bottom, rgba(25, 16, 34, 0.4) 0%, rgba(25, 16, 34, 0.9) 100%);
+        }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark text-white overflow-x-hidden font-display">
+
+    <!-- ============================================ -->
+    <!-- HERO SECTION - First thing visitors see -->
+    <!-- ============================================ -->
+    <div class="relative h-screen w-full overflow-hidden">
+        
+        <!-- You can use a video background, image, or gradient -->
+<div class="absolute inset-0 z-0">
+    <div class="w-full h-full bg-center bg-cover scale-105" 
+         data-alt="Cinematic dark fantasy landscape with swirling purple cosmic energy and obsidian mountains" 
+         style='background-image: url("vid/Logo1.png");'>
+    </div>
+    <!-- Dark overlay for text readability -->
+    <div class="absolute inset-0 hero-gradient z-10"></div>
+</div>
+
+        <!-- ============================================ -->
+        <!-- NAVIGATION BAR -->
+        <!-- ============================================ -->
+        <header class="fixed top-0 left-0 w-full z-50 glass-nav border-b border-white/10">
+            <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+                
+                <!-- CHANGE THIS: Update your logo and team name -->
+                <div class="flex items-center gap-3">
+                    <div class="text-primary">
+                        <span class="material-symbols-outlined text-4xl">deployed_code</span>
+                    </div>
+                    <h2 class="text-xl font-bold tracking-tight uppercase tracking-widest">TheGameHub</h2>
+                </div>
+                
+                <!-- CHANGE THIS: Update navigation links -->
+                <!-- Make sure href matches your actual page names -->
+                <nav class="hidden md:flex items-center gap-10">
+                    <a class="text-sm font-medium hover:text-primary transition-colors" href="index.html">Home</a>
+                    <a class="text-sm font-medium hover:text-primary transition-colors" href="projects.html">Projects</a>
+                    
+                </nav>
+                
+                <!-- CHANGE THIS: Update the Discord link or replace with your social media -->
+    <div class="flex items-center gap-4">
+    <a
+        href="https://discord.gg/SxpxaUyxuj"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="flex items-center gap-2 bg-primary hover:bg-primary/80 transition-all px-5 py-2.5 rounded-lg text-sm font-bold"
+    >
+        <span class="material-symbols-outlined text-lg">chat</span>
+        Join Discord
+    </a>
+</div>
+
+        </header>
+
+        <!-- ============================================ -->
+        <!-- HERO CONTENT - Main headline and tagline -->
+        <!-- ============================================ -->
+        <div class="relative z-20 flex flex-col items-center justify-center h-full text-center px-4">
+            <div class="max-w-4xl mx-auto">
+                
+                <!-- CHANGE THIS: Update the badge text to describe your studio/team -->
+                <span class="inline-block py-10 px-10 rounded-full bg-primary/20 border border-primary/30 text-primary text-white font-bold uppercase tracking-widest mb-6">
+                    Game Development Studio & Community
+                </span>
+                
+                <!-- CHANGE THIS: Update your team name -->
+                <h1 class="text-6xl md:text-8xl font-bold leading-none mb-8  ">
+                    TheGameHub <span class="text-white">STUDIO</span>
+                </h1>
+                
+                <!-- CHANGE THIS: Write your team's mission statement or tagline -->
+                <p class="text-lg md:text-xl text-white/70 max-w-2xl mx-auto mb-12 font-light leading-relaxed">
+                  
+                </p>
+                
+                <!-- CHANGE THIS: Update button links and text -->
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <button onclick="window.location.href='projects.html'" class="flex min-w-[200px] items-center justify-center rounded-lg h-14 px-8 bg-primary text-white text-base font-bold tracking-wide hover:scale-105 transition-transform shadow-[0_0_20px_rgba(115,17,212,0.4)]">
+                        Explore Our Worlds
+                   
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator - This animates to encourage scrolling -->
+        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2 opacity-50">
+            <span class="text-[10px] uppercase tracking-[0.3em]">Scroll</span>
+            <span class="material-symbols-outlined animate-bounce">keyboard_double_arrow_down</span>
+        </div>
+    </div>
+
+    
+
+
+    <!-- ============================================ -->
+    <!-- FOOTER - Contact and social links -->
+    <!-- ============================================ -->
+    <footer id="contact" class="bg-background-dark border-t border-white/5 py-12 px-6">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+            
+            <!-- CHANGE THIS: Update footer branding -->
+            <div class="flex items-center gap-3">
+                <div class="text-primary/50">
+                    <span class="material-symbols-outlined text-2xl">deployed_code</span>
+                </div>
+                <h2 class="text-sm font-bold tracking-widest uppercase opacity-50">TheGameHub Studios</h2>
+            </div>
+            
+            <!-- CHANGE THIS: Update social media links -->
+            <!-- Replace # with actual URLs to your social media pages 
+            <div class="flex gap-8">
+                <a class="opacity-40 hover:opacity-100 transition-opacity" href="#" title="Website">
+                    <span class="material-symbols-outlined">public</span>
+                </a>
+                <a class="opacity-40 hover:opacity-100 transition-opacity" href="#" title="YouTube">
+                    <span class="material-symbols-outlined">play_circle</span>
+                </a>
+                <a class="opacity-40 hover:opacity-100 transition-opacity" href="#" title="Email">
+                    <span class="material-symbols-outlined">mail</span>
+                </a>
+            </div>-->
+            
+            <!-- CHANGE THIS: Update copyright year and studio name -->
+            <p class="text-white/20 text-xs tracking-wider">
+                © 2026 TheGameHub Studios. All rights reserved 
+               .
+            </p>
+            <p class="text-white/20 text-xs tracking-wider"> thegamehub.sda@outlook.com  </p>
+        </div>
+    </footer>
+
+</body>
+</html>

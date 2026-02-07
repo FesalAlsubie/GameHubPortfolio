@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    
+    <!-- CHANGE THIS: Update the title -->
+    <title>Game Project: Working progress | TheGameHub Portfolio</title>
+    
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Noto+Sans:wght@400;500;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        // KEEP SAME: Should match your main page colors
+                        "primary": "#7311d4",
+                        "background-light": "#f7f6f8",
+                        "background-dark": "#191022",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"],
+                        "sans": ["Noto Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+    
+    <style>
+        /* Custom styles for the fullscreen viewer */
+        #viewer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 9999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        #viewer-content {
+            max-width: 90%;
+            max-height: 90%;
+            position: relative;
+        }
+        
+        #viewer-content img,
+        #viewer-content video {
+            max-width: 100%;
+            max-height: 90vh;
+            border-radius: 10px;
+        }
+        
+        .viewer-btn {
+            position: fixed;
+            background: rgba(115, 17, 212, 0.8);
+            color: white;
+            border: none;
+            padding: 15px 20px;
+            cursor: pointer;
+            font-size: 20px;
+            border-radius: 8px;
+            z-index: 10000;
+        }
+        
+        .viewer-btn:hover {
+            background: rgba(115, 17, 212, 1);
+        }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-sans text-slate-900 dark:text-slate-100 antialiased">
+
+    <!-- ============================================ -->
+    <!-- FULLSCREEN MEDIA VIEWER -->
+    <!-- This appears when users click on images/videos -->
+    <!-- ============================================ -->
+    <div id="viewer">
+        <button class="viewer-btn" style="top: 20px; right: 20px;" onclick="closeViewer()">✕ Close</button>
+        <button class="viewer-btn" style="top: 50%; left: 20px; transform: translateY(-50%);" onclick="prevItem()">‹ Prev</button>
+        <button class="viewer-btn" style="top: 50%; right: 20px; transform: translateY(-50%);" onclick="nextItem()">Next ›</button>
+        <div id="viewer-content"></div>
+    </div>
+
+    <div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+        
+        <!-- ============================================ -->
+        <!-- NAVIGATION BAR -->
+        <!-- ============================================ -->
+        <header class="sticky top-0 z-50 w-full border-b border-white/10 bg-background-dark/80 backdrop-blur-md px-6 lg:px-20 py-4">
+            <div class="max-w-7xl mx-auto flex items-center justify-between">
+                
+                <!-- CHANGE THIS: Update to match your main page branding -->
+                <div class="flex items-center gap-3">
+                    <div class="size-8 text-primary">
+                        <svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M44 4H30.6666V17.3334H17.3334V30.6666H4V44H44V4Z" fill="currentColor"></path>
+                        </svg>
+                    </div>
+                    <h2 class="font-display text-xl font-bold tracking-tight">TheGameHub</h2>
+                </div>
+                
+                <!-- CHANGE THIS: Update navigation links to match your pages -->
+                <nav class="hidden md:flex items-center gap-8">
+                    <a class="text-sm font-medium hover:text-primary transition-colors" href="index.html">Home</a>
+                    <a class="text-sm font-medium hover:text-primary transition-colors" href="projects.html">Projects</a>
+                   
+                    
+                </nav>
+                
+                <!-- CHANGE THIS: Update button link or text 
+                <button class="bg-primary hover:bg-primary/90 text-white px-6 py-2 rounded-lg font-bold text-sm transition-all">
+                    Contact Us
+                </button>
+            </div>-->
+        </header>
+
+        <main class="flex-1 w-full max-w-7xl mx-auto px-6 lg:px-20 py-12">
+            
+            <!-- ============================================ -->
+            <!-- PROJECT TITLE SECTION -->
+            <!-- ============================================ -->
+            <div class="mb-12 text-center md:text-left">
+                
+                <!-- CHANGE THIS: Update project status badge -->
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/20 text-primary text-xs font-bold uppercase tracking-wider mb-4">
+                    <span class="relative flex h-2 w-2">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+                    </span>
+                    Some Of Our Work
+                </div>
+                
+                <!-- CHANGE THIS: Update project name -->
+                <h1 class="font-display text-5xl md:text-7xl font-bold mb-4 bg-gradient-to-r from-white to-primary bg-clip-text text-transparent">
+                    TheGameHub
+                </h1>
+                
+                <!-- CHANGE THIS: Update project description -->
+                <p class="text-xl text-slate-400 max-w-2xl">
+                    Some Of Our Works 
+                </p>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- VIDEO PLAYER SECTION -->
+            <!-- This is a clickable area that opens the video in fullscreen -->
+            <!-- ============================================ -->
+<div class="mb-16">
+    <div class="relative group aspect-video w-full rounded-xl overflow-hidden bg-slate-900 border border-white/10 shadow-2xl shadow-primary/10">
+        
+        <!-- CHANGE THIS: Replace with your actual gameplay video -->
+        <!-- Video element with preview -->
+        <video 
+  id="heroVideo" 
+  src="vid/video.mp4" 
+  muted 
+  class="w-full h-full object-contain bg-black">
+</video>
+
+        
+        <!-- Play button overlay - CLICKABLE -->
+        <div id="playOverlay" class="absolute inset-0 bg-black/40 flex items-center justify-center cursor-pointer" onclick="playHeroVideo()">
+            <button class="size-20 bg-primary rounded-full flex items-center justify-center text-white shadow-lg hover:scale-110 transition-transform pointer-events-none">
+                <span class="material-symbols-outlined !text-4xl fill-1">play_arrow</span>
+            </button>
+        </div>
+        
+        <!-- Video player UI with FULL CONTROLS -->
+        <div id="videoControls" class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent opacity-0 transition-opacity pointer-events-none">
+            <!-- Top controls - close and fullscreen -->
+            <div class="absolute top-4 right-4 flex gap-2">
+                <button onclick="toggleFullscreen()" class="pointer-events-auto size-10 bg-black/50 hover:bg-primary rounded-full flex items-center justify-center text-white transition-all">
+                    <span class="material-symbols-outlined text-xl">fullscreen</span>
+                </button>
+            </div>
+            
+            <!-- Bottom controls -->
+            <div class="absolute inset-x-0 bottom-0 p-6">
+                <div class="flex flex-col gap-3">
+                    <!-- Progress bar - CLICKABLE -->
+                    <div class="h-1.5 w-full bg-white/20 rounded-full overflow-hidden cursor-pointer pointer-events-auto" onclick="seekVideo(event)">
+                        <div id="progressBar" class="h-full bg-primary rounded-full relative" style="width: 0%">
+                            <div class="absolute right-0 top-1/2 -translate-y-1/2 size-4 bg-white rounded-full shadow-lg"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Control buttons -->
+                    <div class="flex justify-between items-center text-xs font-medium text-white/70">
+                        <div class="flex items-center gap-3">
+                            <!-- Play/Pause button -->
+                            <button id="playPauseBtn" onclick="togglePlayPause()" class="pointer-events-auto hover:text-primary transition-colors">
+                                <span class="material-symbols-outlined text-2xl">pause</span>
+                            </button>
+                            
+                            <!-- Time display -->
+                            <span id="timeDisplay">00:00 / 00:00</span>
+                        </div>
+                        
+                        <div class="flex items-center gap-4">
+                            <!-- Volume control -->
+                            <div class="flex items-center gap-2 pointer-events-auto">
+                                <button onclick="toggleMute()" class="hover:text-primary transition-colors">
+                                    <span id="volumeIcon" class="material-symbols-outlined text-xl">volume_up</span>
+                                </button>
+                                <!-- Volume slider -->
+                                <input type="range" id="volumeSlider" min="0" max="100" value="100" 
+                                       oninput="changeVolume(this.value)"
+                                       class="w-20 h-1 bg-white/20 rounded-full appearance-none cursor-pointer"
+                                       style="accent-color: #7311d4;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Custom slider styling */
+    #volumeSlider::-webkit-slider-thumb {
+        appearance: none;
+        width: 12px;
+        height: 12px;
+        background: white;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+    
+    #volumeSlider::-moz-range-thumb {
+        width: 12px;
+        height: 12px;
+        background: white;
+        border-radius: 50%;
+        cursor: pointer;
+        border: none;
+    }
+</style>
+
+<script>
+let isPlaying = false;
+
+// Function to play the hero video inline
+function playHeroVideo() {
+    const video = document.getElementById('heroVideo');
+    const overlay = document.getElementById('playOverlay');
+    const controls = document.getElementById('videoControls');
+    
+    video.play();
+    video.muted = false;
+    isPlaying = true;
+    
+    overlay.style.display = 'none';
+    controls.style.opacity = '1';
+    controls.style.pointerEvents = 'auto';
+    
+    updatePlayPauseIcon();
+    
+    // Update progress bar
+    video.addEventListener('timeupdate', updateProgress);
+    
+    // Show overlay again when video ends
+    video.addEventListener('ended', function() {
+        overlay.style.display = 'flex';
+        controls.style.opacity = '0';
+        controls.style.pointerEvents = 'none';
+        isPlaying = false;
+        updatePlayPauseIcon();
+    });
+}
+
+// Toggle play/pause
+function togglePlayPause() {
+    const video = document.getElementById('heroVideo');
+    
+    if (video.paused) {
+        video.play();
+        isPlaying = true;
+    } else {
+        video.pause();
+        isPlaying = false;
+    }
+    
+    updatePlayPauseIcon();
+}
+
+// Update play/pause icon
+function updatePlayPauseIcon() {
+    const btn = document.getElementById('playPauseBtn');
+    btn.innerHTML = isPlaying 
+        ? '<span class="material-symbols-outlined text-2xl">pause</span>'
+        : '<span class="material-symbols-outlined text-2xl">play_arrow</span>';
+}
+
+// Update progress bar
+function updateProgress() {
+    const video = document.getElementById('heroVideo');
+    const progress = (video.currentTime / video.duration) * 100;
+    document.getElementById('progressBar').style.width = progress + '%';
+    
+    // Update time display
+    const current = formatTime(video.currentTime);
+    const total = formatTime(video.duration);
+    document.getElementById('timeDisplay').textContent = `${current} / ${total}`;
+}
+
+// Seek video when clicking progress bar
+function seekVideo(event) {
+    const video = document.getElementById('heroVideo');
+    const progressBar = event.currentTarget;
+    const rect = progressBar.getBoundingClientRect();
+    const pos = (event.clientX - rect.left) / rect.width;
+    video.currentTime = pos * video.duration;
+}
+
+// Toggle mute
+function toggleMute() {
+    const video = document.getElementById('heroVideo');
+    const volumeIcon = document.getElementById('volumeIcon');
+    const volumeSlider = document.getElementById('volumeSlider');
+    
+    video.muted = !video.muted;
+    
+    if (video.muted) {
+        volumeIcon.textContent = 'volume_off';
+        volumeSlider.value = 0;
+    } else {
+        volumeIcon.textContent = 'volume_up';
+        volumeSlider.value = video.volume * 100;
+    }
+}
+
+// Change volume
+function changeVolume(value) {
+    const video = document.getElementById('heroVideo');
+    const volumeIcon = document.getElementById('volumeIcon');
+    
+    video.volume = value / 100;
+    video.muted = false;
+    
+    // Update icon based on volume level
+    if (value == 0) {
+        volumeIcon.textContent = 'volume_off';
+        video.muted = true;
+    } else if (value < 50) {
+        volumeIcon.textContent = 'volume_down';
+    } else {
+        volumeIcon.textContent = 'volume_up';
+    }
+}
+
+
+// Format time helper
+function formatTime(seconds) {
+    if (isNaN(seconds)) return '00:00';
+    const mins = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+    return `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+}
+
+// Show/hide controls on hover
+document.getElementById('heroVideo').parentElement.addEventListener('mouseenter', function() {
+    if (isPlaying) {
+        document.getElementById('videoControls').style.opacity = '1';
+    }
+});
+
+document.getElementById('heroVideo').parentElement.addEventListener('mouseleave', function() {
+    if (isPlaying) {
+        setTimeout(() => {
+            if (!document.querySelector('#videoControls:hover')) {
+                document.getElementById('videoControls').style.opacity = '0.3';
+            }
+        }, 2000);
+    }
+});
+</script>
+
+<script>
+// Function to play the hero video inline
+function playHeroVideo() {
+    const video = document.getElementById('heroVideo');
+    const overlay = document.getElementById('playOverlay');
+    const controls = document.getElementById('videoControls');
+    
+    video.play();
+    video.muted = false; // Unmute when user clicks play
+    overlay.style.display = 'none';
+    controls.style.opacity = '1';
+    
+    // Update progress bar
+    video.addEventListener('timeupdate', function() {
+        const progress = (video.currentTime / video.duration) * 100;
+        document.getElementById('progressBar').style.width = progress + '%';
+        
+        // Update time display
+        const current = formatTime(video.currentTime);
+        const total = formatTime(video.duration);
+        document.getElementById('timeDisplay').textContent = `${current} / ${total}`;
+    });
+    
+    // Show overlay again when video ends
+    video.addEventListener('ended', function() {
+        overlay.style.display = 'flex';
+        controls.style.opacity = '0';
+    });
+}
+
+// Toggle mute
+function toggleMute() {
+    const video = document.getElementById('heroVideo');
+    video.muted = !video.muted;
+    event.target.textContent = video.muted ? 'volume_off' : 'volume_up';
+}
+
+// Format time helper
+function formatTime(seconds) {
+    if (isNaN(seconds)) return '00:00';
+    const mins = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+    return `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+}
+</script>
+
+            <!-- ============================================ -->
+            <!-- TWO-COLUMN LAYOUT -->
+            <!-- Left: Project details | Right: Tech specs & team -->
+            <!-- ============================================ -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+                
+                <!-- ============================================ -->
+                <!-- LEFT COLUMN: PROJECT OVERVIEW & GALLERY -->
+                <!-- ============================================ -->
+                <div class="lg:col-span-2 space-y-12">
+                    
+                    <!-- Project Overview Section -->
+                    <section>
+                        <h2 class="font-display text-3xl font-bold mb-6 flex items-center gap-3">
+                            <span class="material-symbols-outlined text-primary">description</span> 
+                            Team Overview
+                        </h2>
+                        
+                        <!-- CHANGE THIS: Write your project description (multiple paragraphs) -->
+                        <div class="prose prose-invert max-w-none text-slate-400 leading-relaxed space-y-4">
+                            <p>
+                                We are a multidisciplinary game development team brought together by The Game Hub community. 
+                                What unites us is a shared passion for creating meaningful and engaging games. 
+                                Our combined skills span game design, programming, 3D art, narrative design, and music, 
+                                allowing us to take ideas from early concepts to polished playable experiences. We believe games are more than entertainment 
+                                they are stories, systems, and worlds meant to be felt.
+                            </p>
+                            <p>
+                                As active members of The Game Hub community, we play a key role in supporting and growing 
+                                the local game development ecosystem. Our work extends beyond game creation to include community
+                                 management and event planning, where we organize workshops, talks, game jams, and collaborative initiatives. 
+                                 Through these efforts, we aim to create an inclusive and professional space that empowers developers, encourages 
+                                 knowledge sharing, and helps talent connect, learn, and grow.
+                            </p>
+                        </div>
+                    </section>
+
+                    <!-- Media Gallery Section -->
+                    <section>
+                        <div class="flex items-center justify-between mb-6">
+                            <h2 class="font-display text-3xl font-bold flex items-center gap-3">
+                                <span class="material-symbols-outlined text-primary">gallery_thumbnail</span> 
+                                Media Gallery
+                            </h2>
+                            <button class="text-sm font-bold text-primary hover:underline">View All</button>
+                        </div>
+                        
+                        <!-- CHANGE THIS: Replace ALL images with your actual project screenshots -->
+                        <!-- Each image has onclick="openViewer(INDEX)" - make sure INDEX matches your items array -->
+                        <div class="grid grid-cols-2 gap-4">
+                            
+                            <!-- Gallery Image 1 - CUSTOMIZE -->
+                            <div class="group relative aspect-video rounded-lg overflow-hidden border border-white/5 cursor-pointer" onclick="openViewer(0)">
+                                <img class="object-cover w-full h-full group-hover:scale-110 transition-transform duration-500" 
+                                     data-alt="Cyberpunk character design concept art" 
+                                      src="vid/Atheer.png"alt="Unity Engine"class="w-10 h-6">
+                                <div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                    <span class="material-symbols-outlined text-white">zoom_in</span>
+                                </div>
+                            </div>
+
+                            <!-- Gallery Image 2 - CUSTOMIZE -->
+                            <div class="group relative aspect-video rounded-lg overflow-hidden border border-white/5 cursor-pointer" onclick="openViewer(1)">
+                                <img class="object-cover w-full h-full group-hover:scale-110 transition-transform duration-500" 
+                                     data-alt="Retro hardware and neon lights setup" 
+                                     src="vid/Fatmah.png"alt="Unity Engine"class="w-10 h-6">
+                                <div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                    <span class="material-symbols-outlined text-white">zoom_in</span>
+                                </div>
+                            </div>
+
+                            <!-- Gallery Image 3 - CUSTOMIZE -->
+                            <div class="group relative aspect-video rounded-lg overflow-hidden border border-white/5 cursor-pointer" onclick="openViewer(2)">
+                                <img class="object-cover w-full h-full group-hover:scale-110 transition-transform duration-500" 
+                                     data-alt="Neon street level screenshot from game" 
+                                     src="vid/Remma.png"alt="Unity Engine"class="w-10 h-6">
+                                <div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                    <span class="material-symbols-outlined text-white">zoom_in</span>
+                                </div>
+                            </div>
+
+                            <!-- Gallery Image 4 - CUSTOMIZE -->
+                            <div class="group relative aspect-video rounded-lg overflow-hidden border border-white/5 cursor-pointer" onclick="openViewer(3)">
+                                <img class="object-cover w-full h-full group-hover:scale-110 transition-transform duration-500" 
+                                     data-alt="Atmospheric foggy environment art" 
+                                     src="vid/Atheer2.jpg"alt="Unity Engine"class="w-10 h-6">
+                                <div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                    <span class="material-symbols-outlined text-white">zoom_in</span>
+                                </div>
+                            </div>
+                             <!-- Gallery Image 5 - CUSTOMIZE -->
+                            <div class="group relative aspect-video rounded-lg overflow-hidden border border-white/5 cursor-pointer" onclick="openViewer(3)">
+                                <img class="object-cover w-full h-full group-hover:scale-110 transition-transform duration-500" 
+                                     data-alt="Atmospheric foggy environment art" 
+                                     src="vid/Fatmah2.png"alt="Unity Engine"class="w-10 h-6">
+                                <div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                    <span class="material-symbols-outlined text-white">zoom_in</span>
+                                </div>
+                            </div>
+                            <!-- Gallery Image 6 - CUSTOMIZE -->
+                            <div class="group relative aspect-video rounded-lg overflow-hidden border border-white/5 cursor-pointer" onclick="openViewer(3)">
+                                <img class="object-cover w-full h-full group-hover:scale-110 transition-transform duration-500" 
+                                     data-alt="Atmospheric foggy environment art" 
+                                     src="vid/Reema2.png"alt="Unity Engine"class="w-10 h-6">
+                                <div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                    <span class="material-symbols-outlined text-white">zoom_in</span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Dev Log Section -->
+                    
+                        
+                        <!-- CHANGE THIS: Write your dev log content 
+                        <h4 class="text-xl font-bold mb-3">Here is Johnny</h4>
+                        <p class="text-slate-400 line-clamp-3 mb-6">
+                            Follow For more
+                        </p>-->
+                        
+                       <!-- <button class="flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all">
+                            Read Full Update <span class="material-symbols-outlined">arrow_forward</span>
+                        </button>-->
+                    </section>
+                </div>
+
+                <!-- ============================================ -->
+                <!-- RIGHT COLUMN: TECHNICAL INFO & TEAM -->
+                <!-- ============================================ -->
+                <div class="space-y-8">
+                    
+                    <!-- Technical Specs Card -->
+                    <div class="bg-white/5 border border-white/10 rounded-xl p-6">
+                        <h3 class="font-display text-lg font-bold mb-6 border-b border-white/10 pb-4">
+                            Technical Breakdown
+                        </h3>
+                        
+                        <div class="space-y-6">
+                            
+                            <!-- CHANGE THIS: Update your game engine -->
+                           <!-- Technical Breakdown -->
+<div>
+    <p class="text-xs uppercase text-slate-500 font-bold tracking-widest mb-4">
+        Tools
+    </p>
+
+    <div class="space-y-3">
+
+        <!-- Unity -->
+        <div class="flex items-center gap-3">
+            <div class="size-10 bg-black/40 rounded flex items-center justify-center">
+                <img src="vid/6fc6917029464e18aef80d4f82f479a4.jpeg"
+                     alt="Unity Engine"
+                     class="w-10 h-6">
+            </div>
+            <span class="font-medium">Unity Engine</span>
+        </div>
+
+        <!-- Unreal Engine -->
+        <div class="flex items-center gap-3">
+            <div class="size-10 bg-black/40 rounded flex items-center justify-center">
+                <img src="vid/unreal-engine-white-logo-png-7017516947713345x5letwbsz.png"
+                     alt="Unreal Engine"
+                     class="w-6 h-6">
+            </div>
+            <span class="font-medium">Unreal Engine</span>
+        </div>
+
+        <!-- Maya -->
+        <div class="flex items-center gap-3">
+            <div class="size-10 bg-black/40 rounded flex items-center justify-center">
+                <img src="vid/607-6079375_included-in-yellowdog-for-maya-autodesk-maya-logo.png"
+                     alt="Maya"
+                     class="w-6 h-6">
+            </div>
+            <span class="font-medium">Maya</span>
+        </div>
+
+        <!-- Blender -->
+        <div class="flex items-center gap-3">
+            <div class="size-10 bg-black/40 rounded flex items-center justify-center">
+                <img src="vid/347-3472687_blender-software-logo.png"
+                     alt="Blender"
+                     class="w-8 h-6">
+            </div>
+            <span class="font-medium">Blender</span>
+        </div>
+
+    </div>
+</div>
+
+                            <!-- CHANGE THIS: Update your platforms 
+                            <div>
+                                <p class="text-xs uppercase text-slate-500 font-bold tracking-widest mb-2">Platform</p>
+                                <div class="flex gap-2">
+                                    <span class="px-3 py-1 bg-white/10 rounded text-xs font-medium">Windows PC</span>
+                                    
+                                </div>-->
+                            </div>
+
+                            <!-- CHANGE THIS: Update your tech stack 
+                            <div>
+                                <p class="text-xs uppercase text-slate-500 font-bold tracking-widest mb-2">Core Tech Stack</p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="text-xs text-slate-400 px-2 py-1 bg-white/5 border border-white/5 rounded">C#</span>
+                                    <span class="text-xs text-slate-400 px-2 py-1 bg-white/5 border border-white/5 rounded">Shader Graph</span>
+                                    <span class="text-xs text-slate-400 px-2 py-1 bg-white/5 border border-white/5 rounded">FMOD</span>
+                                    <span class="text-xs text-slate-400 px-2 py-1 bg-white/5 border border-white/5 rounded">Blender</span>
+                                    <span class="text-xs text-slate-400 px-2 py-1 bg-white/5 border border-white/5 rounded">MAYA</span>
+                                </div>-->
+                            </div>
+
+                           
+
+                    <!-- The Squad Card -->
+                    <div class="bg-white/5 border border-white/10 rounded-xl p-6">
+                        <h3 class="font-display text-lg font-bold mb-6 border-b border-white/10 pb-4">
+                            The Team
+                        </h3>
+                        
+                        <!-- CHANGE THIS: Update ALL team members working on this project -->
+                        <div class="space-y-4">
+                            
+                            <!-- Member 1 - CUSTOMIZE -->
+                            <div class="flex items-center gap-4">
+                                <div class="size-10 rounded-full bg-primary/20 flex items-center justify-center font-bold text-primary">
+                                    FA
+                                </div>
+                                <div>
+                                    <p class="text-sm font-bold">Fesal Alsubie.</p>
+                                    <p class="text-xs text-slate-500">Game Designer & Programmer</p>
+                                </div>
+                            </div>
+
+                            <!-- Member 2 - CUSTOMIZE -->
+                            <div class="flex items-center gap-4">
+                                <div class="size-10 rounded-full bg-primary/20 flex items-center justify-center font-bold text-primary">
+                                    AA
+                                </div>
+                                <div>
+                                    <p class="text-sm font-bold">Atheer Alkhalaw.</p>
+                                    <p class="text-xs text-slate-500">Game Designer & Programmer</p>
+                                </div>
+                            </div>
+
+                            <!-- Member 3 - CUSTOMIZE -->
+                            <div class="flex items-center gap-4">
+                                <div class="size-10 rounded-full bg-primary/20 flex items-center justify-center font-bold text-primary">
+                                    FO
+                                </div>
+                                <div>
+                                    <p class="text-sm font-bold">Fatmah AL-Oudah.</p>
+                                    <p class="text-xs text-slate-500">Game Designer & Programmer</p>
+                                </div>
+                            </div>
+
+                            <!-- Member 4 - CUSTOMIZE -->
+                            <div class="flex items-center gap-4">
+                                <div class="size-10 rounded-full bg-primary/20 flex items-center justify-center font-bold text-primary">
+                                    FZ
+                                </div>
+                                <div>
+                                    <p class="text-sm font-bold">Fahed Zaher.</p>
+                                    <p class="text-xs text-slate-500">Narrative Designer & Music Composer</p>
+                                </div>
+                            </div>
+
+                            <!-- Member 5 - CUSTOMIZE -->
+                            <div class="flex items-center gap-4">
+                                <div class="size-10 rounded-full bg-primary/20 flex items-center justify-center font-bold text-primary">
+                                    RS
+                                </div>
+                                <div>
+                                    <p class="text-sm font-bold">Reema Khaled.</p>
+                                    <p class="text-xs text-slate-500">Artist </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- ============================================ -->
+        <!-- FOOTER -->
+        <!-- ============================================ -->
+        <footer class="mt-20 border-t border-white/10 py-12 px-6 lg:px-20 text-center">
+            <div class="max-w-7xl mx-auto flex flex-col items-center gap-6">
+                
+                <!-- CHANGE THIS: Match your branding -->
+                <div class="flex items-center gap-3 opacity-50">
+                    <div class="size-6">
+                        <svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M44 4H30.6666V17.3334H17.3334V30.6666H4V44H44V4Z" fill="currentColor"></path>
+                        </svg>
+                    </div>
+                    <h2 class="font-display font-bold tracking-tight">TheGameHub Studio</h2>
+                </div>
+                
+                <!-- CHANGE THIS: Update copyright -->
+                <p class="text-sm text-slate-500">
+                    © 2026 TheGameHub. All game assets and trademarks belong to their respective creators.
+                </p>
+                
+                <!-- CHANGE THIS: Update social links -->
+                <div class="flex gap-6">
+                    <a class="text-slate-400 hover:text-primary transition-colors" href="#">
+                        <span class="material-symbols-outlined">public</span>
+                    </a>
+                    <a class="text-slate-400 hover:text-primary transition-colors" href="#">
+                        <span class="material-symbols-outlined">mail</span>
+                    </a>
+                    <a class="text-slate-400 hover:text-primary transition-colors" href="#">
+                        <span class="material-symbols-outlined">groups</span>
+                    </a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- JAVASCRIPT FOR MEDIA GALLERY VIEWER -->
+    <!-- ============================================ -->
+    <script>
+        // CRITICAL: Update this array with YOUR actual media files
+        // Make sure the file paths match where you save your images/videos/PDFs
+        // The array index corresponds to onclick="openViewer(INDEX)" in the HTML above
+        let items = [
+            // Index 0 - First gallery image
+            { type: "image", src: "images/FesalAlsubie_Project_Turbine_V01.PNG" },
+            // Index 1 - Second gallery image
+            { type: "image", src: "images/Project_FesalAlsubie_ModelingBasics.PNG" },
+            // Index 2 - Third gallery image
+            { type: "image", src: "images/Project_FesalAlsubie_MedPack.PNG" },
+            // Index 3 - Fourth gallery image (currently using index 3 placeholder)
+            { type: "image", src: "https://lh3.googleusercontent.com/aida-public/AB6AXuB_CojM2JHsWcVpch2d2zcA4ocNGvnKFYNj4bweFu3WPRKoOgrdm4iNaxn7CW1HRiMlSQlNzB546xe08a-k6sBJzeMkXa43sENtTxlfRNDWntkaKlRpWr_aN_He2BiIYmeaBSH0Rp5m5Vc800K0FkLiwYoijcFxbfCuHPSTx3ezKuw9JNB7w5eGO1ndCbV_ol-o9mUdw7nJkJR3TLe_5x5IAYplW_wRW7whGi0FidiG2LvH7AD1CgNEnnydhuDun7jcwwWnMo08EgiE" },
+            // Index 4 - PDF document
+            { type: "pdf", src: "files/Qassas presentation.pdf" },
+            // Index 5 - Another PDF
+            { type: "pdf", src: "files/Qassas Game Pitch deck.pdf" },
+            // Index 6 - Animation video
+            { type: "video", src: "images/Animation.mp4" },
+            // Index 7 - Gameplay video
+            { type: "video", src: "images/LET ME WORK IN PEACE GamePlay.mp4" }
+        ];
+
+      <!--  let currentIndex = 0;
+
+        // Opens the fullscreen viewer at a specific index
+      function openViewer(index) {
+            currentIndex = index;
+            showItem();
+            document.getElementById("viewer").style.display = "flex";
+        }
+
+        // Closes the fullscreen viewer
+        function closeViewer() {
+            document.getElementById("viewer").style.display = "none";
+            document.getElementById("viewer-content").innerHTML = "";
+        }
+
+        // Displays the current item (image, video, or PDF)
+        function showItem() {
+            let container = document.getElementById("viewer-content");
+            let item = items[currentIndex];
+
+            if (item.type === "image") {
+                container.innerHTML = `<img src="${item.src}">`;
+            } 
+            else if (item.type === "video") {
+                container.innerHTML = `<video src="${item.src}" controls autoplay></video>`;
+            }
+            else if (item.type === "pdf") {
+                container.innerHTML = `
+                    <embed src="${item.src}"
+                           type="application/pdf"
+                           width="1080px"
+                           height="1080px"
+                           style="border-radius:10px;">
+                `;
+            }
+        }
+
+        // Go to next item in gallery
+        function nextItem() {
+            currentIndex = (currentIndex + 1) % items.length;
+            showItem();
+        }
+
+        // Go to previous item in gallery
+        function prevItem() {
+            currentIndex = (currentIndex - 1 + items.length) % items.length;
+            showItem();
+        }
+
+        // Keyboard navigation support
+        document.addEventListener('keydown', function(e) {
+            if (document.getElementById("viewer").style.display === "flex") {
+                if (e.key === "ArrowRight") nextItem();
+                if (e.key === "ArrowLeft") prevItem();
+                if (e.key === "Escape") closeViewer();
+            }
+        });-->
+    </script>
+
+</body>
+</html>
